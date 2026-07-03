@@ -11,7 +11,7 @@
     "author": "Data Dance s.r.o., ONLYOFFICE, Odoo Community Association (OCA)",
     "website": "https://www.onlyoffice.com/office-for-odoo?utm_source=odoo_market",
     "category": "Document Management",
-    "version": "1.0.0",
+    "version": "1.0.3",
     "license": "LGPL-3",
     "support": "support@onlyoffice.com",
     "depends": ["onlyoffice_odoo", "dms"],
@@ -20,6 +20,16 @@
         "views/onlyoffice_dms_access_views.xml",
         "views/dms_directory_views.xml",
         "views/dms_file_views.xml",
+    ],
+    "images": [
+        "static/description/main_screenshot.png",
+        "static/description/01_creating_files.png",
+        "static/description/02_new_onlyoffice_document.png",
+        "static/description/03_file_editing.png",
+        "static/description/04_edit_in_onlyoffice.png",
+        "static/description/05_preview_in_onlyoffice.png",
+        "static/description/06_onlyoffice_access.png",
+        "static/description/07_directory_level_access.png",
     ],
     "assets": {
         "web.assets_backend": [
