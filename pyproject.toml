@@ -1,5 +1,5 @@
 [project]
-name = "onlyoffice_odoo"
+name = "onlyoffice_odoo_dms"
 version = "0.0.0"  # Just a placeholder; the real version is the git tag
 authors = [{ name = "ONLYOFFICE", email = "support@onlyoffice.com" }]
 dependencies = [

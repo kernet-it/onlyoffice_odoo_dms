@@ -50,8 +50,8 @@ repos:
         args:
           - --addons-dir=.
           - --branch=17.0
-          - --org-name=ONLYOFFICE
-          - --repo-name=onlyoffice_odoo
+          - --org-name=OCA
+          - --repo-name=dms
           - --if-source-changed
           - --keep-source-digest
       - id: oca-gen-external-dependencies

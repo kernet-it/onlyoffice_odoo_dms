@@ -11,8 +11,10 @@
     "author": "Data Dance s.r.o., ONLYOFFICE, Odoo Community Association (OCA)",
     "website": "https://www.onlyoffice.com/office-for-odoo?utm_source=odoo_market",
     "category": "Document Management",
-    "version": "1.0.3",
+    "version": "17.0.1.0.3",
     "license": "LGPL-3",
+    "development_status": "Production/Stable",
+    "maintainers": ["ONLYOFFICE"],
     "support": "support@onlyoffice.com",
     "depends": ["onlyoffice_odoo", "dms"],
     "data": [
