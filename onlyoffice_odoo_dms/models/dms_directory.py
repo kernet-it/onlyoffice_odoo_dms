@@ -3,7 +3,6 @@
 
 from odoo import api, fields, models
 
-from .dms_file import _LINK_ROLE_SELECTION
 from .onlyoffice_dms_access import _ROLES_ALL, _ROLES_READONLY
 
 
@@ -11,7 +10,7 @@ class DmsDirectory(models.Model):
     _inherit = "dms.directory"
 
     oo_link_access = fields.Selection(
-        selection=_LINK_ROLE_SELECTION,
+        selection=_ROLES_ALL,
         string="Public Link",
         default="none",
         help=(

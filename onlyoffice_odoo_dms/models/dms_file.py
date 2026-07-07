@@ -7,27 +7,9 @@ from odoo import api, fields, models
 
 from odoo.addons.onlyoffice_odoo.utils import file_utils
 
+from .onlyoffice_dms_access import _ROLES_ALL, _ROLES_READONLY, _filter_roles_by_file
+
 _logger = logging.getLogger(__name__)
-
-_ROLE_SELECTION = [
-    ("none", "None"),
-    ("view", "Viewer"),
-    ("commenter", "Commenter"),
-    ("reviewer", "Reviewer"),
-    ("edit", "Editor"),
-    ("form_filling", "Form Filling"),
-    ("custom_filter", "Custom Filter"),
-]
-
-_LINK_ROLE_SELECTION = [
-    ("none", "None"),
-    ("view", "Viewer"),
-    ("commenter", "Commenter"),
-    ("reviewer", "Reviewer"),
-    ("edit", "Editor"),
-    ("form_filling", "Form Filling"),
-    ("custom_filter", "Custom Filter"),
-]
 
 
 class DmsFile(models.Model):
@@ -57,7 +39,7 @@ class DmsFile(models.Model):
         string="Editable in ONLYOFFICE",
     )
     oo_effective_role = fields.Selection(
-        selection=_ROLE_SELECTION,
+        selection=_ROLES_ALL,
         string="ONLYOFFICE Role",
         compute="_compute_oo_effective_role",
         help="Effective ONLYOFFICE role for the current user on this file.",
@@ -92,8 +74,6 @@ class DmsFile(models.Model):
     @api.model
     def oo_role_dynamic_values(self):
         """Proxy so the widget can call this from the dms.file form view."""
-        from .onlyoffice_dms_access import _ROLES_ALL, _ROLES_READONLY, _filter_roles_by_file
-
         level = self.env.context.get("depending_on")
         if level == "write":
             roles = _ROLES_ALL
