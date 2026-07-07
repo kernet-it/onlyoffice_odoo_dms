@@ -4,6 +4,8 @@
 from odoo import api, fields, models
 from odoo.exceptions import AccessError
 
+from odoo.addons.onlyoffice_odoo.utils import file_utils, format_utils
+
 _ROLES_ALL = [
     ("none", "None"),
     ("view", "Viewer"),
@@ -31,8 +33,6 @@ def _filter_roles_by_file(roles, file_name):
     """Remove roles whose required action is not supported by the file format."""
     if not file_name:
         return roles
-    from odoo.addons.onlyoffice_odoo.utils import file_utils, format_utils
-
     ext = file_utils.get_file_ext(file_name)
     actions = set()
     for fmt in format_utils.get_supported_formats():
