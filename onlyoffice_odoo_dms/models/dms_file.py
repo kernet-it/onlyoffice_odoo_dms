@@ -4,7 +4,6 @@
 import logging
 
 from odoo import api, fields, models
-from odoo.exceptions import AccessError
 
 from odoo.addons.onlyoffice_odoo.utils import file_utils
 
@@ -172,13 +171,13 @@ class DmsFile(models.Model):
             dms_file_as_user.check_access_rights("write")
             dms_file_as_user.check_access_rule("write")
             return "edit"
-        except (AccessError, Exception) as err:
+        except Exception as err:
             _logger.debug("No DMS write access for user %s on file %s: %s", user.id, self.id, err)
         try:
             dms_file_as_user.check_access_rights("read")
             dms_file_as_user.check_access_rule("read")
             return "view"
-        except (AccessError, Exception):
+        except Exception:
             return "none"
 
     def _get_oo_role_from_access_groups(self, user):

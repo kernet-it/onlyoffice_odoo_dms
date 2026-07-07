@@ -2,7 +2,6 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0-standalone.html).
 
 from odoo import api, fields, models
-from odoo.exceptions import AccessError
 
 from odoo.addons.onlyoffice_odoo.utils import file_utils, format_utils
 
@@ -163,19 +162,19 @@ class OnlyofficeDmsFileAccessUser(models.Model):
                 file_as_user.check_access_rights("read")
                 file_as_user.check_access_rule("read")
                 record.dms_perm_read = True
-            except (AccessError, Exception):
+            except Exception:
                 record.dms_perm_read = False
             try:
                 file_as_user.check_access_rights("write")
                 file_as_user.check_access_rule("write")
                 record.dms_perm_write = True
-            except (AccessError, Exception):
+            except Exception:
                 record.dms_perm_write = False
             try:
                 file_as_user.check_access_rights("unlink")
                 file_as_user.check_access_rule("unlink")
                 record.dms_perm_unlink = True
-            except (AccessError, Exception):
+            except Exception:
                 record.dms_perm_unlink = False
             if record.dms_perm_write:
                 record.dms_access_level = "write"
