@@ -3,7 +3,7 @@
     "name": "ONLYOFFICE DMS",
     "summary": "Edit and preview DMS files with ONLYOFFICE Docs.",
     "author": "Data Dance s.r.o., ONLYOFFICE, Odoo Community Association (OCA)",
-    "website": "https://www.onlyoffice.com/office-for-odoo?utm_source=odoo_market",
+    "website": "https://github.com/OCA/dms",
     "category": "Document Management",
     "version": "17.0.1.0.3",
     "license": "LGPL-3",
