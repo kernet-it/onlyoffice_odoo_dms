@@ -1,8 +1,9 @@
 # Copyright (C) 2026 Data Dance s.r.o., Ascensio System SIA
-# License LGPL-3.0 or later (https://www.gnuorg/licenses/agpl.html).
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0-standalone.html).
 
 from odoo import api, fields, models
-from odoo.exceptions import AccessError
+
+from odoo.addons.onlyoffice_odoo.utils import file_utils, format_utils
 
 _ROLES_ALL = [
     ("none", "None"),
@@ -31,8 +32,6 @@ def _filter_roles_by_file(roles, file_name):
     """Remove roles whose required action is not supported by the file format."""
     if not file_name:
         return roles
-    from odoo.addons.onlyoffice_odoo.utils import file_utils, format_utils
-
     ext = file_utils.get_file_ext(file_name)
     actions = set()
     for fmt in format_utils.get_supported_formats():
@@ -162,17 +161,17 @@ class OnlyofficeDmsFileAccessUser(models.Model):
             try:
                 file_as_user.check_access("read")
                 record.dms_perm_read = True
-            except (AccessError, Exception):
+            except Exception:
                 record.dms_perm_read = False
             try:
                 file_as_user.check_access("write")
                 record.dms_perm_write = True
-            except (AccessError, Exception):
+            except Exception:
                 record.dms_perm_write = False
             try:
                 file_as_user.check_access("unlink")
                 record.dms_perm_unlink = True
-            except (AccessError, Exception):
+            except Exception:
                 record.dms_perm_unlink = False
             if record.dms_perm_write:
                 record.dms_access_level = "write"

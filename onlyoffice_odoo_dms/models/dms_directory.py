@@ -1,9 +1,8 @@
 # Copyright (C) 2026 Data Dance s.r.o.
-# License LGPL-3.0 or later (https://www.gnuorg/licenses/agpl.html).
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0-standalone.html).
 
 from odoo import api, fields, models
 
-from .dms_file import _LINK_ROLE_SELECTION
 from .onlyoffice_dms_access import _ROLES_ALL, _ROLES_READONLY
 
 
@@ -11,7 +10,7 @@ class DmsDirectory(models.Model):
     _inherit = "dms.directory"
 
     oo_link_access = fields.Selection(
-        selection=_LINK_ROLE_SELECTION,
+        selection=_ROLES_ALL,
         string="Public Link",
         default="none",
         help=(

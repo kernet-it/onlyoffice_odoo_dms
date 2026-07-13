@@ -1,34 +1,15 @@
 # Copyright (C) 2026 Data Dance s.r.o., Ascensio System SIA
-# License LGPL-3.0 or later (https://www.gnuorg/licenses/agpl.html).
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0-standalone.html).
 
 import logging
 
 from odoo import api, fields, models
-from odoo.exceptions import AccessError
 
 from odoo.addons.onlyoffice_odoo.utils import file_utils
 
+from .onlyoffice_dms_access import _ROLES_ALL, _ROLES_READONLY, _filter_roles_by_file
+
 _logger = logging.getLogger(__name__)
-
-_ROLE_SELECTION = [
-    ("none", "None"),
-    ("view", "Viewer"),
-    ("commenter", "Commenter"),
-    ("reviewer", "Reviewer"),
-    ("edit", "Editor"),
-    ("form_filling", "Form Filling"),
-    ("custom_filter", "Custom Filter"),
-]
-
-_LINK_ROLE_SELECTION = [
-    ("none", "None"),
-    ("view", "Viewer"),
-    ("commenter", "Commenter"),
-    ("reviewer", "Reviewer"),
-    ("edit", "Editor"),
-    ("form_filling", "Form Filling"),
-    ("custom_filter", "Custom Filter"),
-]
 
 
 class DmsFile(models.Model):
@@ -58,7 +39,7 @@ class DmsFile(models.Model):
         string="Editable in ONLYOFFICE",
     )
     oo_effective_role = fields.Selection(
-        selection=_ROLE_SELECTION,
+        selection=_ROLES_ALL,
         string="ONLYOFFICE Role",
         compute="_compute_oo_effective_role",
         help="Effective ONLYOFFICE role for the current user on this file.",
@@ -93,8 +74,6 @@ class DmsFile(models.Model):
     @api.model
     def oo_role_dynamic_values(self):
         """Proxy so the widget can call this from the dms.file form view."""
-        from .onlyoffice_dms_access import _ROLES_ALL, _ROLES_READONLY, _filter_roles_by_file
-
         level = self.env.context.get("depending_on")
         if level == "write":
             roles = _ROLES_ALL
@@ -171,12 +150,12 @@ class DmsFile(models.Model):
         try:
             dms_file_as_user.check_access("write")
             return "edit"
-        except (AccessError, Exception) as err:
+        except Exception as err:
             _logger.debug("No DMS write access for user %s on file %s: %s", user.id, self.id, err)
         try:
             dms_file_as_user.check_access("read")
             return "view"
-        except (AccessError, Exception):
+        except Exception:
             return "none"
 
     def _get_oo_role_from_access_groups(self, user):
