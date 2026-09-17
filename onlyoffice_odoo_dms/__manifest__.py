@@ -5,7 +5,7 @@
     "author": "Data Dance s.r.o., ONLYOFFICE, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/dms",
     "category": "Document Management",
-    "version": "17.0.1.0.3",
+    "version": "18.0.1.0.0",
     "license": "LGPL-3",
     "development_status": "Production/Stable",
     "maintainers": ["ONLYOFFICE"],
