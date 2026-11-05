@@ -70,6 +70,7 @@ class TestOnlyofficeDmsFileAccessUser(TransactionCase):
         cls.directory = cls.env["dms.directory"].create(
             {
                 "name": "Test OO Directory",
+                "is_root_directory": True,
                 "storage_id": cls.storage.id,
             }
         )
@@ -94,7 +95,7 @@ class TestOnlyofficeDmsFileAccessUser(TransactionCase):
         self.assertEqual(access.user_id, self.env.user)
 
     def test_create_user_access_record_edit_role(self):
-        user2 = self.env.ref("base.user_demo")
+        user2 = self.env["res.users"].create({"name": "OO Editor", "login": "oo_editor"})
         access = self.env["onlyoffice.dms.file.access.user"].create(
             {
                 "file_id": self.dms_file.id,

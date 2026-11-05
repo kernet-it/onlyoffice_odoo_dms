@@ -14,7 +14,7 @@
     <field name="inherit_id" ref="dms.view_dms_file_form" />
     <field name="arch" type="xml">
       <!-- Invisible fields needed by button visibility expressions -->
-      <xpath expr="//sheet/div[@class='oe_button_box']" position="before">
+      <xpath expr="//sheet/div[hasclass('oe_button_box')]" position="before">
         <field name="oo_is_viewable" invisible="1" />
         <field name="oo_is_editable" invisible="1" />
       </xpath>
