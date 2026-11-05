@@ -14,8 +14,8 @@ from odoo import _, http
 from odoo.exceptions import AccessError, ValidationError
 from odoo.http import request
 
-from odoo.addons.onlyoffice_odoo.controllers.controllers import (
-    Onlyoffice_Connector,
+from odoo.addons.onlyoffice_odoo.controllers.main import (
+    OnlyofficeConnector,
     onlyoffice_urlopen,
 )
 from odoo.addons.onlyoffice_odoo.utils import (
@@ -35,11 +35,11 @@ _mobile_regex = (
 )
 
 
-class OnlyofficeDms_Connector(Onlyoffice_Connector):
+class OnlyofficeDms_Connector(OnlyofficeConnector):
     """
     HTTP routes for ONLYOFFICE ↔ DMS integration.
 
-    Inherits Onlyoffice_Connector to reuse shared helpers:
+    Inherits OnlyofficeConnector to reuse shared helpers:
     get_user_from_token(), filter_xss(), etc.
     """
 
@@ -425,6 +425,7 @@ class OnlyofficeDms_Connector(Onlyoffice_Connector):
             "docTitle": filename,
             "docIcon": (f"/onlyoffice_odoo/static/description/editor_icons/{document_type}.ico"),
             "docApiJS": docserver_url + "web-apps/apps/api/documents/api.js",
+            "customFunctionsJS": file_utils.get_custom_functions_url(),
             "editorConfig": root_config,
             "session_info": session_info,
         }
@@ -501,6 +502,7 @@ class OnlyofficeDms_Connector(Onlyoffice_Connector):
             "docTitle": filename,
             "docIcon": (f"/onlyoffice_odoo/static/description/editor_icons/{document_type}.ico"),
             "docApiJS": docserver_url + "web-apps/apps/api/documents/api.js",
+            "customFunctionsJS": file_utils.get_custom_functions_url(),
             "editorConfig": root_config,
             "session_info": session_info,
         }

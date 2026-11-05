@@ -1,0 +1,3 @@
+Support the ``feature/18.0`` branch of ``onlyoffice_odoo``, where the connector
+module is ``controllers.main`` and the class is ``OnlyofficeConnector``. The
+addon no longer loads with the older ``18.0`` branch of ``onlyoffice_odoo``.
